@@ -1,0 +1,39 @@
+@import-normalize;
+
+$color-primary: #00B0FF;
+$color-primary-light: #80D8FF;
+$color-complementary: #FF5100;
+$color-bg: #E1F5FE;
+$color-font: #000000;
+$border-radius: 4px;
+$border: 1px solid $color-primary;
+$font-size-headline: 40px;
+$font-size-title: 30px;
+$font-size-subtitle: 20px;
+$font-size-body: 14px;
+$font-size-placeholder: 12px;
+$font-size-button: 10px;
+$width-small: 70%;
+$width-medium: 80%;
+$width-large: 90%;
+$width-full: 100%;
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a:link,
+a:visited,
+a:active {
+	text-decoration: none;
+	color: $color-font;	
+}

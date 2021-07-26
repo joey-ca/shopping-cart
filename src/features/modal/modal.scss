@@ -1,0 +1,21 @@
+@import '../../index';
+
+.modal {
+	display: block; 
+  	position: fixed; 
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	width: 75%; // may need to be overwritten to initial in the desktop mode
+  	z-index: 1;
+  	text-align: center;
+  	border: 2px solid green;
+  	border-radius: $border-radius;
+  	padding: 10px;
+  	background-color: #ffffff;
+
+  	p {
+  		margin: 0;
+  	}
+}
+

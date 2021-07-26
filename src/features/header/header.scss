@@ -1,0 +1,45 @@
+@import '../../index';
+
+.nav-container {
+	background-color: $color-primary;
+	padding: 10px 0;
+	position: fixed;
+	top: 0;
+	width: $width-full;
+
+	nav {
+		width: $width-large;
+		font-size: 24px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+
+		a {
+			display: inline-flex;
+			align-items: center;
+			position: relative;
+
+			.cart-item-num-container {
+				border-radius: 50%;
+				background-color: $color-complementary;
+				width: 20px;
+				height: 20px;
+				display: inline-flex;
+				align-items: center;
+				position: absolute;
+				right: -10%;
+				top: -15%;
+				
+				span {
+					display: inline-block;
+					margin: 0 auto;
+					padding: 1px;
+					font-size: $font-size-body;
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+
