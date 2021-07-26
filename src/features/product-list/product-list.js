@@ -13,15 +13,14 @@ export default function ProductList(props) {
 	const button = useRef(null);
 
 	const phoneList = phones.map(phone => {
-		const add = () => {
+		const add = e => {
+			e.stopPropagation();
 			dispatch(addItem(phone));
 			setShowModal(true);
 		}
 
 		const directToDetail = e => {
-			if (e.relatedTarget === button.current) {
-				e.preventDefault();
-			} else {
+			if (e.target !== button.current) {
 				history.push(`/phone/${phone.id}`);
 			}
 		}

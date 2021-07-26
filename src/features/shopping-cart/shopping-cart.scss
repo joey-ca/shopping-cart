@@ -35,6 +35,10 @@
 				padding: 0 10px;
 				width: 70%;
 
+				a:hover {
+					text-decoration: underline;
+				}
+
 				.count-controller {
 					display: flex;
 					align-items: center;
