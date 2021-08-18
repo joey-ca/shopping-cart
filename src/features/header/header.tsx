@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './header.scss';
 
-export default function Header(props) {
+export default function Header(props: any) {
   const cartItems = useSelector(state => state.shoppingCart.itemCount);
 
   return (

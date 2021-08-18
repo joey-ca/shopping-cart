@@ -6,7 +6,7 @@ import ShoppingCart from './features/shopping-cart/shopping-cart';
 import ProductDetail from './features/product-detail/product-detail';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
-export default function App(props) {
+export default function App(props: any) {
   return (
     <Router>
       <Header />
