@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { addItem } from '../shopping-cart/shoppingCartSlice';
 import Modal from '../modal/modal';
 import { useHistory } from "react-router-dom";
 import './product-list.scss';
 
-export default function ProductList(props) {
-	const phones = useSelector(state => state.product);
-	const dispatch = useDispatch();
+export default function ProductList(props: any): JSX.Element {
+	const phones = useAppSelector(state => state.product);
+	const dispatch = useAppDispatch();
 	const [showModal, setShowModal] = useState(false);
 	let history = useHistory();
-	const button = useRef(null);
+	const button = useRef<HTMLButtonElement>(null!);
 
 	const phoneList = phones.map(phone => {
-		const add = e => {
+		const add = (e: React.MouseEvent<HTMLButtonElement>): void => {
 			e.stopPropagation();
 			dispatch(addItem(phone));
 			setShowModal(true);
 		}
 
-		const directToDetail = e => {
+		const directToDetail = (e: React.MouseEvent<HTMLDivElement>): void => {
 			if (e.target !== button.current) {
 				history.push(`/phone/${phone.id}`);
 			}

@@ -1,39 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { useParams } from 'react-router-dom';
-import { addItem, plusItem, minusItem } from '../shopping-cart/shoppingCartSlice';
+import { addItem } from '../shopping-cart/shoppingCartSlice';
 import Modal from '../modal/modal';
 import './product-detail.scss';
+import type { ProductState } from '../product/productSlice';
 
-export default function ProductDetail(props) {
-	const phones = useSelector(state => state.product);
-	const dispatch = useDispatch();
+export default function ProductDetail(props: any): JSX.Element {
+	const phones = useAppSelector(state => state.product);
+	const dispatch = useAppDispatch();
 	const [showModal, setShowModal] = useState(false);
 	
-	let {id} = useParams();
+	let {id} = useParams<{id: string}>();
 
-	const phone = phones.find(element => element.id.toString() === id);
+	let render: JSX.Element;
+
+	const phone = phones.find(element => element.id.toString() === id) as ProductState;
 
 	const [mainImage, setMainImage] = useState(phone.images[0]);
-	
-	const handleClick = () => {
-		dispatch(addItem(phone));
-		setShowModal(true);
-	}
 
-	const handleMouseOver = e => {
-		setMainImage(e.currentTarget.src);
-	}
-
-	useEffect(() => {
-		if (showModal) {
-			const time = setTimeout(() => {setShowModal(false)}, 2000);
-			return () => clearTimeout(time)
+	if (phone) {		
+		const handleClick = (): void => {
+			dispatch(addItem(phone));
+			setShowModal(true);
 		}
-	}, [showModal]);
 
-	return (
-		<div className="product-detail-container">
+		const handleMouseOver = (e: React.MouseEvent<HTMLImageElement>): void => {
+			setMainImage(e.currentTarget.src);
+		}
+
+		render = (
+			<div className="product-detail-container">
 			<div className="images">
 				<img src={mainImage} alt="phone" />
 				<div className="thumbnail">
@@ -55,6 +53,20 @@ export default function ProductDetail(props) {
 				<button onClick={handleClick}>ADD TO CART</button>
 			</div>
 			{showModal ? <Modal /> : null}
-		</div>
+			</div>
+		)
+	} else {
+		render = <h1>Error</h1>;
+	}
+
+	useEffect(() => {
+		if (showModal) {
+			const time = setTimeout(() => {setShowModal(false)}, 2000);
+			return () => clearTimeout(time)
+		}
+	}, [showModal]);
+
+	return (
+		<div>{render}</div>
 	)
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './modal.scss';
 
-export default function Modal(props) {
+export default function Modal(props: any) {
 	return (
 		<div className="modal">
 			<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" viewBox="0 0 16 16">

@@ -1,33 +1,38 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { removeItem, plusItem, minusItem } from '../shopping-cart/shoppingCartSlice';
 import { Link } from "react-router-dom";
 import './shopping-cart.scss';
+import type { ProductState } from '../product/productSlice';
 
-export default function ShoppingCart(props) {
-	const cartItems = useSelector(state => state.shoppingCart);
-	const dispatch = useDispatch();
+export default function ShoppingCart(props: any): JSX.Element {
+	const cartItems = useAppSelector(state => state.shoppingCart);
+	const dispatch = useAppDispatch();
 
 	let sum = 0;
 	for (let i = 0; i < cartItems.itemCount.length; i++) {
 		if(cartItems.itemCount[i]){
-			const itemPrice = cartItems.uniqueItems[i].price.toFixed(2);
-			sum += cartItems.itemCount[i] * itemPrice;
+			let item = cartItems.uniqueItems[i] as ProductState;
+			let num = cartItems.itemCount[i] as number;
+			const itemPrice = parseFloat(item.price.toFixed(2));
+			sum += num * itemPrice;
 		}
 	}
 
 	const cartItemsList = cartItems.uniqueItems.map(item => {
-		const handleRemove = () => {
-			dispatch(removeItem(item.id));
-		}
-		const handleMinus = () => {
-			dispatch(minusItem(item.id));
-		}
-		const handlePlus = () => {
-			dispatch(plusItem(item.id));
-		}
-
+		
 		if(item) {
+			const handleRemove = () => {
+				dispatch(removeItem(item.id));
+			}
+			const handleMinus = () => {
+				dispatch(minusItem(item.id));
+			}
+			const handlePlus = () => {
+				dispatch(plusItem(item.id));
+			}
+
 			return (
 				<table key={item.id * 100}>
 					<tbody>
@@ -59,6 +64,8 @@ export default function ShoppingCart(props) {
 					</tbody>
 				</table>
 			)
+		} else {
+			return null;
 		}
 	});
 
