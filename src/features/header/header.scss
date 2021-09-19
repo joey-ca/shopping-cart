@@ -38,8 +38,44 @@
 					text-align: center;
 				}
 			}
+
+			.tooltiptext {
+				width: 160px;
+				background-color: #555;
+				color: #fff;
+				font-size: $font-size-body;
+				text-align: center;
+				padding: 5px 0;
+				border-radius: 6px;
+				  
+				/* Position the tooltip text */
+				position: absolute;
+				z-index: 1;
+				left: -165px;
+
+				/* Animation */
+				animation: jump 1.5s linear infinite;
+			}
+
+			.tooltiptext::after {
+			    content: "";
+			    position: absolute;
+			    top: -5%;
+			    left: 100%;
+			    margin-left: -8px;
+			    border-width: 8px;
+			    border-style: solid;
+			    border-color: #555 transparent transparent transparent;
+			    transform: rotate(-25deg);
+			}
 		}
 	}
+}
+
+@keyframes jump {
+  0% {top: 90%;}
+  50% {top: 110%;}
+  100% {top: 90%;}
 }
 
 

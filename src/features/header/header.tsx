@@ -7,6 +7,7 @@ import './header.scss';
 export default function Header(props: any): JSX.Element {
   const cartItems = useAppSelector(state => state.shoppingCart.itemCount);
   const [cartItemsNum, setCartItemsNum] = useState(0);
+  const [showTooltip, setShowTooltip] = useState(true);
 
   useEffect(() => {
     let sum: number = 0;
@@ -17,6 +18,11 @@ export default function Header(props: any): JSX.Element {
     })
     setCartItemsNum(sum);
   }, [cartItems]);
+
+  useEffect(() => {
+    const time = setTimeout(() => {setShowTooltip(false)}, 6000);
+    return () => clearTimeout(time)
+  }, []);
 
   return (
     <div className="nav-container">
@@ -31,6 +37,7 @@ export default function Header(props: any): JSX.Element {
             (<span className="cart-item-num-container"><span>0</span></span>)
           }*/}
           <span className="cart-item-num-container"><span>{cartItemsNum}</span></span>
+          {showTooltip ? (<span className="tooltiptext">Please click me to view the shopping cart</span>) : null}
 			</Link>
     	</nav>
     </div>
